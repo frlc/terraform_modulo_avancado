@@ -1,4 +1,4 @@
 output "instance_ip" {
   description = "Ip privado da instância"
-  value       = aws_instance.example.private_ip
+  value       = try(aws_instance.example[0].private_ip, null)
 }

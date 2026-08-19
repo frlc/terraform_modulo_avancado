@@ -19,4 +19,5 @@ variable "make_bd" {
 variable "env" {
   type        = string
   description = "Nome do ambiente"
+  default     = "dev"
 }
