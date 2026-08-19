@@ -24,7 +24,7 @@ resource "aws_instance" "example" {
   instance_type = var.instance_type
 
   tags = {
-    Name = locals.name
+    Name = local.name
   }
 }
 
