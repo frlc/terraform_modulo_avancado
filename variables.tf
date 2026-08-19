@@ -7,5 +7,16 @@ variable "instance_type" {
 
 variable "name" {
   type        = string
+  description = "Nome do projeto"
+}
+
+variable "make_bd" {
+  type        = bool
+  description = "Indica se deve criar um volume de dados"
+  default     = false
+}
+
+variable "env" {
+  type        = string
   description = "Nome do ambiente"
 }
