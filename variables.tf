@@ -14,11 +14,11 @@ variable "instance_type" {
 variable "env" {
   type        = string
   description = "Nome do ambiente"
-  default     = "dev"
+  default     = "dev"'
 }
 
 variable "instancias" {
-  type        = set(string)
-  description = "Lista de instâncias EC2 a serem criadas"
-  default     = []
+  type        = map(string)
+  description = "Map de instâncias EC2 a serem criadas"
+  default     = {}
 }
