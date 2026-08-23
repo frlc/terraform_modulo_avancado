@@ -18,10 +18,11 @@ resource "aws_instance" "this" {
   for_each = var.instancias
   #count         = var.env == "prod" ? 1 : 0
   ami           = data.aws_ami.ubuntu.id
-  instance_type = each.value
+  instance_type = each.value.instance_type
 
   tags = {
     Name = each.key
+    Plataforma = each.value.plataforma
   }
 }
 

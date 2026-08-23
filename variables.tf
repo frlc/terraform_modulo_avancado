@@ -18,7 +18,11 @@ variable "env" {
 }
 
 variable "instancias" {
-  type        = map(string)
+  type        = map(object({
+    instance_type = string
+    plataforma     = string
+    
+  }))
   description = "Map de instâncias EC2 a serem criadas"
   default     = {}
 }
