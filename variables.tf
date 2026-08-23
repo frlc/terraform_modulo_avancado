@@ -5,19 +5,20 @@ variable "instance_type" {
   sensitive = false
 }
 
-variable "name" {
-  type        = string
-  description = "Nome do projeto"
-}
+# variable "name" {
+#   type        = string
+#   description = "Nome do projeto"
+# }
 
-variable "make_bd" {
-  type        = bool
-  description = "Indica se deve criar um volume de dados"
-  default     = false
-}
 
 variable "env" {
   type        = string
   description = "Nome do ambiente"
   default     = "dev"
+}
+
+variable "instancias" {
+  type        = set(string)
+  description = "Lista de instâncias EC2 a serem criadas"
+  default     = []
 }
