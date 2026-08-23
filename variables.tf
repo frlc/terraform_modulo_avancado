@@ -14,7 +14,7 @@ variable "instance_type" {
 variable "env" {
   type        = string
   description = "Nome do ambiente"
-  default     = "dev"'
+  default     = "dev"
 }
 
 variable "instancias" {
