@@ -24,5 +24,13 @@ resource "aws_instance" "this" {
     Name = each.key
     Plataforma = each.value.plataforma
   }
+
+  dynamic "ebs_block_device" {
+    for_each = var.extra-values
+    content {
+      device_name = ebs_block_device.value.device_name
+      volume_size = ebs_block_device.value.volume_size
+    }
+
 }
 

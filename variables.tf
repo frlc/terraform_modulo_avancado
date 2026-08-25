@@ -26,3 +26,12 @@ variable "instancias" {
   description = "Map de instâncias EC2 a serem criadas"
   default     = {}
 }
+
+variable "extra-values" {
+  type = map(object({
+    device_name = string
+    volume_size = number
+  }))
+  description = "Map de volumes EBS adicionais a serem criados"
+  default     = {}
+}
