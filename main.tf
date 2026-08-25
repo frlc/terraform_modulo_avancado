@@ -31,6 +31,7 @@ resource "aws_instance" "this" {
       device_name = ebs_block_device.value.device_name
       volume_size = ebs_block_device.value.volume_size
     }
+  }
 
 }
 
