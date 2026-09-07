@@ -2,7 +2,7 @@ variable "instance_type" {
   type        = string
   description = "Tipo de instancia EC2 a utilizar"
   default     = "t3.micro"
-  sensitive = false
+  sensitive   = false
 }
 
 # variable "name" {
@@ -18,10 +18,10 @@ variable "env" {
 }
 
 variable "instancias" {
-  type        = map(object({
+  type = map(object({
     instance_type = string
-    plataforma     = string
-    
+    plataforma    = string
+
   }))
   description = "Map de instâncias EC2 a serem criadas"
   default     = {}
