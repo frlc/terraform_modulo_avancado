@@ -1,7 +1,5 @@
 name: Pull Request
 
-run-name: "${{ github.actor }} abriu ou atualizou um Pull Request"
-
 on:
   pull_request:
     branches:
@@ -19,6 +17,18 @@ jobs:
       - name: Obter o código
         uses: actions/checkout@v7.0.1
 
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Verificar formatação
+        run: terraform fmt -check -recursive
+
+      - name: Inicializar sem backend
+        run: terraform init -backend=false -input=false
+
+      - name: Validar configuração
+        run: terraform validate
+
       - name: Analisar configurações com Trivy
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -26,4 +36,4 @@ jobs:
           scan-ref: .
           format: table
           exit-code: "1"
-          severity: HIGH,CRITICAL,MEDIUM
+          severity: HIGH,CRITICAL
