@@ -1,20 +1,29 @@
-name: GitHub Actions Pull Request
-run-name: ${{ github.actor }} is testing out GitHub Actions for PR 🚀
-on: 
+name: Pull Request
+
+run-name: "${{ github.actor }} abriu ou atualizou um Pull Request"
+
+on:
   pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
 jobs:
-  check_iac:
-    name: Check IaC for vulnerabilities
-    runs-on: ubuntu-latest
+  check-iac:
+    name: Check IaC
+    runs-on: ubuntu-24.04
+
     steps:
-      - name: Checkout code
+      - name: Obter o código
         uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner
+      - name: Analisar configurações com Trivy
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          scan-type: 'config'
-          hide-progress: 'true'
-          format: 'table'
-          exit-code: '1'
-          severity: 'CRITICAL,HIGH'
+          scan-type: config
+          scan-ref: .
+          format: table
+          exit-code: "1"
+          severity: HIGH,CRITICAL
