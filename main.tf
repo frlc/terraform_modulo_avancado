@@ -15,12 +15,12 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "this" {
-  for_each = var.instancias
+  for_each      = var.instancias
   ami           = data.aws_ami.ubuntu.id
   instance_type = each.value.instance_type
 
   tags = {
-    Name = each.key
+    Name       = each.key
     Plataforma = each.value.plataforma
   }
 

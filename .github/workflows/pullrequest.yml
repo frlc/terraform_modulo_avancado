@@ -1,0 +1,39 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check-iac:
+    name: Check IaC
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v7.0.1
+
+      - name: Instalar Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+
+      - name: Verificar formatação
+        run: terraform fmt -check -recursive
+
+      - name: Inicializar sem backend
+        run: terraform init -backend=false -input=false
+
+      - name: Validar configuração
+        run: terraform validate
+
+      - name: Analisar configurações com Trivy
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          scan-ref: .
+          format: table
+          exit-code: "1"
+          severity: HIGH,CRITICAL
